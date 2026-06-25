@@ -36,6 +36,32 @@ class Updater {
         add_action( 'delete_site_transient_update_plugins', function() {
             delete_transient( self::CACHE_KEY );
         } );
+
+        // Handle force-check request from the Plugins page link.
+        add_action( 'admin_init', [ $this, 'handle_force_check' ] );
+
+        // Add "Check for updates" link to the plugin row.
+        add_filter( 'plugin_action_links_' . self::PLUGIN_SLUG, [ $this, 'add_check_link' ] );
+    }
+
+    public function handle_force_check(): void {
+        if ( empty( $_GET['wmp_force_check'] ) || ! current_user_can( 'update_plugins' ) ) {
+            return;
+        }
+        check_admin_referer( 'wmp_force_check' );
+        delete_transient( self::CACHE_KEY );
+        delete_site_transient( 'update_plugins' );
+        wp_redirect( self_admin_url( 'plugins.php?wmp_checked=1' ) );
+        exit;
+    }
+
+    public function add_check_link( array $links ): array {
+        $url = wp_nonce_url(
+            add_query_arg( 'wmp_force_check', '1', self_admin_url( 'plugins.php' ) ),
+            'wmp_force_check'
+        );
+        $links[] = '<a href="' . esc_url( $url ) . '">Check for updates</a>';
+        return $links;
     }
 
     /**
