@@ -51,7 +51,8 @@ class Updater {
         check_admin_referer( 'wmp_force_check' );
         delete_transient( self::CACHE_KEY );
         delete_site_transient( 'update_plugins' );
-        wp_redirect( self_admin_url( 'plugins.php?wmp_checked=1' ) );
+        wp_update_plugins();
+        wp_redirect( self_admin_url( 'plugins.php' ) );
         exit;
     }
 
