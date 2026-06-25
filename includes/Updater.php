@@ -31,6 +31,11 @@ class Updater {
         add_filter( 'plugins_api',                           [ $this, 'plugin_info' ], 10, 3 );
         add_filter( 'upgrader_post_install',                 [ $this, 'after_install' ], 10, 3 );
         add_action( 'admin_notices',                         [ $this, 'maybe_show_config_notice' ] );
+
+        // When WordPress clears its plugin update cache (e.g. "Check Again"), clear ours too.
+        add_action( 'delete_site_transient_update_plugins', function() {
+            delete_transient( self::CACHE_KEY );
+        } );
     }
 
     /**
