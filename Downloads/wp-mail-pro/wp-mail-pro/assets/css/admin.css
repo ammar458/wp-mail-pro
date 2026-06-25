@@ -1,0 +1,211 @@
+/* WP Mail Pro — Admin Styles */
+
+/* ── Page wrapper ── */
+.wmp-wrap { max-width: 960px !important; }
+
+.wmp-page-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #1d2327 !important;
+    margin: 0 0 20px !important;
+    padding-bottom: 14px !important;
+    border-bottom: 1px solid #e2e4e7 !important;
+    line-height: 1.4 !important;
+}
+.wmp-page-title .dashicons { font-size: 20px !important; width: 20px !important; height: 20px !important; color: #2271b1 !important; }
+
+/* ── Stats row ── */
+.wmp-stats-row {
+    display: grid !important;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+}
+.wmp-stat {
+    background: #fff !important;
+    border: 1px solid #e2e4e7 !important;
+    border-radius: 8px !important;
+    padding: 14px 12px !important;
+    text-align: center !important;
+}
+.wmp-stat strong {
+    display: block !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    margin-bottom: 5px !important;
+    color: #1d2327 !important;
+}
+.wmp-stat span { font-size: 10px !important; color: #8c8f94 !important; text-transform: uppercase !important; letter-spacing: 0.7px !important; font-weight: 600 !important; }
+.wmp-stat.is-success strong { color: #00a32a !important; }
+.wmp-stat.is-error   strong { color: #d63638 !important; }
+.wmp-stat.is-info    strong { color: #2271b1 !important; }
+
+/* ── Cards ── */
+.wmp-card {
+    background: #fff !important;
+    border: 1px solid #e2e4e7 !important;
+    border-radius: 8px !important;
+    margin-bottom: 16px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+.wmp-card-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 12px 18px !important;
+    border-bottom: 1px solid #f0f0f1 !important;
+    background: #fafafa !important;
+}
+.wmp-card-header h2 {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #1d2327 !important;
+    line-height: 1.4 !important;
+}
+.wmp-card-header .dashicons { font-size: 16px !important; width: 16px !important; height: 16px !important; color: #646970 !important; }
+.wmp-card-body { padding: 20px 20px !important; }
+
+/* ── Mailer tiles ── */
+.wmp-mailer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)) !important;
+    gap: 8px !important;
+}
+.wmp-mailer-tile {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 13px !important;
+    border: 1.5px solid #dcdcde !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    background: #fafafa !important;
+    transition: border-color .15s, background .15s !important;
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+    color: #1d2327 !important;
+    user-select: none !important;
+}
+.wmp-mailer-tile:hover { border-color: #2271b1 !important; background: #f0f6ff !important; }
+.wmp-mailer-tile.is-active { border-color: #2271b1 !important; background: #f0f6ff !important; color: #2271b1 !important; }
+.wmp-mailer-tile input[type="radio"] { display: none !important; }
+.wmp-dot { width: 8px !important; height: 8px !important; border-radius: 50% !important; border: 2px solid #c3c4c7 !important; flex-shrink: 0 !important; transition: all .15s !important; }
+.wmp-mailer-tile.is-active .wmp-dot { border-color: #2271b1 !important; background: #2271b1 !important; }
+
+/* ── Form table ── */
+.wmp-card-body .form-table { margin: 0 !important; }
+.wmp-card-body .form-table th { font-size: 13px !important; font-weight: 500 !important; color: #3c434a !important; padding: 9px 10px 9px 0 !important; width: 170px !important; vertical-align: middle !important; }
+.wmp-card-body .form-table td { padding: 7px 0 !important; vertical-align: middle !important; }
+.wmp-card-body .form-table input[type="text"],
+.wmp-card-body .form-table input[type="email"],
+.wmp-card-body .form-table input[type="password"],
+.wmp-card-body .form-table input[type="number"] {
+    border: 1px solid #dcdcde !important;
+    border-radius: 4px !important;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+    color: #1d2327 !important;
+    background: #fff !important;
+    line-height: 1.5 !important;
+    box-shadow: none !important;
+}
+.wmp-card-body .form-table input:focus { border-color: #2271b1 !important; box-shadow: 0 0 0 2px rgba(34,113,177,.12) !important; outline: none !important; }
+.wmp-card-body .form-table select { border: 1px solid #dcdcde !important; border-radius: 4px !important; padding: 6px 10px !important; font-size: 13px !important; }
+.wmp-card-body label { font-size: 13px !important; color: #3c434a !important; }
+
+/* ── Instruction guide ── */
+.wmp-guide { background: #f6f8fb !important; border: 1px solid #dce3ef !important; border-left: 3px solid #2271b1 !important; border-radius: 0 6px 6px 0 !important; padding: 13px 16px !important; margin-bottom: 18px !important; }
+.wmp-guide-title { font-size: 11px !important; font-weight: 700 !important; color: #2271b1 !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; margin: 0 0 9px !important; display: flex !important; align-items: center !important; gap: 5px !important; }
+.wmp-guide ol { margin: 0 0 0 16px !important; padding: 0 !important; }
+.wmp-guide li { font-size: 12.5px !important; color: #3c434a !important; margin-bottom: 4px !important; line-height: 1.55 !important; }
+.wmp-guide li code { background: #e2ebf7 !important; padding: 1px 5px !important; border-radius: 3px !important; font-size: 11px !important; color: #1a4a7a !important; font-family: monospace !important; }
+.wmp-guide a { color: #2271b1 !important; }
+.wmp-guide-tip { margin: 8px 0 0 !important; font-size: 11.5px !important; color: #50575e !important; padding: 6px 10px !important; background: #fff !important; border: 1px solid #e2e4e7 !important; border-radius: 4px !important; }
+
+/* ── URI copy box ── */
+.wmp-uri-box { display: flex !important; align-items: center !important; gap: 8px !important; background: #f6f8fb !important; border: 1px solid #dcdcde !important; border-radius: 4px !important; padding: 7px 12px !important; margin-top: 4px !important; }
+.wmp-uri-box code { font-size: 11.5px !important; color: #1d2327 !important; font-family: monospace !important; flex: 1 !important; word-break: break-all !important; }
+.wmp-uri-box button { background: #fff !important; border: 1px solid #dcdcde !important; border-radius: 3px !important; padding: 3px 8px !important; font-size: 11px !important; cursor: pointer !important; color: #646970 !important; flex-shrink: 0 !important; }
+.wmp-uri-box button:hover { background: #f0f0f1 !important; }
+
+/* ── Section label ── */
+.wmp-section-label { font-size: 10.5px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; color: #8c8f94 !important; margin: 16px 0 5px !important; display: block !important; }
+
+/* ── Badges ── */
+.wmp-badge { display: inline-flex !important; align-items: center !important; padding: 2px 8px !important; border-radius: 20px !important; font-size: 10.5px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.4px !important; line-height: 1.6 !important; }
+.wmp-badge.is-default { background: #f0f0f1 !important; color: #3c434a !important; }
+.wmp-badge.is-success { background: #edfaee !important; color: #1a5c1e !important; }
+.wmp-badge.is-error   { background: #fce8e8 !important; color: #8a1f1f !important; }
+.wmp-badge.is-muted   { background: #f0f0f1 !important; color: #8c8f94 !important; }
+.wmp-badge.is-info    { background: #e8f0fa !important; color: #1a3a6a !important; }
+
+/* ── Buttons ── */
+.wmp-btn-primary { display: inline-block !important; background: #2271b1 !important; color: #fff !important; border: none !important; border-radius: 4px !important; padding: 7px 16px !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; text-decoration: none !important; line-height: 1.5 !important; transition: background .15s !important; }
+.wmp-btn-primary:hover { background: #135e96 !important; color: #fff !important; }
+.wmp-btn-ghost { display: inline-block !important; background: #fff !important; color: #2271b1 !important; border: 1px solid #2271b1 !important; border-radius: 4px !important; padding: 6px 14px !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; text-decoration: none !important; line-height: 1.5 !important; transition: all .15s !important; }
+.wmp-btn-ghost:hover { background: #f0f6ff !important; }
+.wmp-action-btn { display: inline-block !important; background: #fff !important; color: #3c434a !important; border: 1px solid #dcdcde !important; border-radius: 3px !important; padding: 3px 9px !important; font-size: 11.5px !important; font-weight: 500 !important; cursor: pointer !important; text-decoration: none !important; line-height: 1.6 !important; transition: background .1s !important; }
+.wmp-action-btn:hover { background: #f6f7f7 !important; color: #1d2327 !important; }
+.wmp-action-btn.is-danger { color: #d63638 !important; border-color: #f5aaab !important; }
+.wmp-action-btn.is-danger:hover { background: #fce8e8 !important; }
+.wmp-oauth-btn { display: inline-flex !important; align-items: center !important; gap: 6px !important; background: #2271b1 !important; color: #fff !important; border: none !important; border-radius: 4px !important; padding: 7px 14px !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; text-decoration: none !important; transition: background .15s !important; }
+.wmp-oauth-btn:hover { background: #135e96 !important; color: #fff !important; }
+.wmp-oauth-note { font-size: 12px !important; color: #646970 !important; margin-top: 6px !important; }
+
+/* ── Save bar ── */
+.wmp-save-bar { background: #fff !important; border: 1px solid #e2e4e7 !important; border-radius: 8px !important; padding: 13px 18px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; margin-bottom: 20px !important; }
+.wmp-save-bar p { margin: 0 !important; font-size: 12.5px !important; color: #646970 !important; }
+
+/* ── Email log table ── */
+.wmp-log-toolbar { display: flex !important; align-items: center !important; justify-content: space-between !important; flex-wrap: wrap !important; gap: 10px !important; padding: 14px 18px !important; border-bottom: 1px solid #f0f0f1 !important; background: #fafafa !important; }
+.wmp-log-toolbar-left { display: flex !important; align-items: center !important; gap: 8px !important; flex-wrap: wrap !important; }
+.wmp-search-input { border: 1px solid #dcdcde !important; border-radius: 4px !important; padding: 6px 10px !important; font-size: 13px !important; width: 220px !important; }
+.wmp-filter-select { border: 1px solid #dcdcde !important; border-radius: 4px !important; padding: 6px 10px !important; font-size: 13px !important; color: #1d2327 !important; }
+.wmp-filter-btn { background: #2271b1 !important; color: #fff !important; border: none !important; border-radius: 4px !important; padding: 6px 13px !important; font-size: 13px !important; font-weight: 500 !important; cursor: pointer !important; }
+.wmp-clear-link { font-size: 12px !important; color: #2271b1 !important; text-decoration: none !important; }
+
+table.wmp-log-table { width: 100% !important; border-collapse: collapse !important; font-size: 13px !important; }
+table.wmp-log-table thead tr { background: #f9f9f9 !important; }
+table.wmp-log-table thead th { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; color: #646970 !important; padding: 10px 14px !important; text-align: left !important; border-bottom: 1px solid #e2e4e7 !important; white-space: nowrap !important; }
+table.wmp-log-table tbody td { padding: 10px 14px !important; border-bottom: 1px solid #f0f0f1 !important; vertical-align: middle !important; color: #1d2327 !important; }
+table.wmp-log-table tbody tr:last-child td { border-bottom: none !important; }
+table.wmp-log-table tbody tr:hover td { background: #f9fafb !important; }
+
+.wmp-log-subject { font-size: 13px !important; font-weight: 500 !important; color: #1d2327 !important; line-height: 1.4 !important; }
+.wmp-log-error { font-size: 11.5px !important; color: #d63638 !important; margin-top: 2px !important; }
+.wmp-log-to { font-size: 12px !important; color: #646970 !important; }
+.wmp-log-time { font-size: 12px !important; color: #8c8f94 !important; white-space: nowrap !important; }
+
+/* ── Empty state ── */
+.wmp-empty { text-align: center !important; padding: 44px 20px !important; color: #646970 !important; }
+.wmp-empty .dashicons { font-size: 34px !important; width: 34px !important; height: 34px !important; margin-bottom: 10px !important; opacity: .35 !important; display: block !important; margin-left: auto !important; margin-right: auto !important; }
+.wmp-empty p { font-size: 13.5px !important; margin: 0 !important; color: #646970 !important; }
+
+/* ── Debug table ── */
+table.wmp-debug-table { width: 100% !important; border-collapse: collapse !important; font-size: 13px !important; }
+table.wmp-debug-table th, table.wmp-debug-table td { padding: 8px 12px !important; border-bottom: 1px solid #f0f0f1 !important; text-align: left !important; }
+table.wmp-debug-table th { width: 220px !important; background: #f9f9f9 !important; font-weight: 500 !important; color: #3c434a !important; }
+table.wmp-debug-table td { color: #1d2327 !important; }
+table.wmp-debug-table tr:last-child th, table.wmp-debug-table tr:last-child td { border-bottom: none !important; }
+
+/* ── Tools form ── */
+.wmp-test-form input[type="email"], .wmp-test-form input[type="text"] { width: 300px !important; border: 1px solid #dcdcde !important; border-radius: 4px !important; padding: 7px 10px !important; font-size: 13px !important; }
+.wmp-test-form th { font-size: 13px !important; font-weight: 500 !important; color: #3c434a !important; padding: 8px 10px 8px 0 !important; width: 100px !important; }
+.wmp-test-form td { padding: 6px 0 !important; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .wmp-stats-row { grid-template-columns: repeat(3, 1fr) !important; }
+    .wmp-mailer-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 600px) {
+    .wmp-stats-row { grid-template-columns: repeat(2, 1fr) !important; }
+}
