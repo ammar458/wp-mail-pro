@@ -66,8 +66,9 @@ class Core {
         }
 
         // Settings save
-        add_action( 'admin_post_wmp_save_settings', [ new Settings\Settings(), 'save' ] );
-        add_action( 'admin_post_wmp_send_test',     [ new Admin\Pages\ToolsPage(), 'handle_test_email' ] );
+        add_action( 'admin_post_wmp_save_settings',    [ new Settings\Settings(), 'save' ] );
+        add_action( 'admin_post_wmp_send_test',        [ new Admin\Pages\ToolsPage(), 'handle_test_email' ] );
+        add_action( 'admin_post_wmp_send_weekly_report', [ new Admin\Pages\ReportsPage(), 'handle_send_report' ] );
 
         // REST API
         add_action( 'rest_api_init', [ new API\RestController(), 'register_routes' ] );

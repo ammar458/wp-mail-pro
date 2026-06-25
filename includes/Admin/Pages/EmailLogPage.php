@@ -49,7 +49,7 @@ class EmailLogPage {
             'card'        => 'background:#fff;border:1px solid #e2e4e7;border-radius:8px;overflow:hidden;margin-bottom:16px',
             'toolbar'     => 'display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:13px 18px;border-bottom:1px solid #f0f0f1;background:#fafafa',
             'search'      => 'border:1px solid #dcdcde;border-radius:4px;padding:6px 10px;font-size:13px;width:220px;outline:none',
-            'select'      => 'border:1px solid #dcdcde;border-radius:4px;padding:6px 8px;font-size:13px;color:#1d2327',
+            'select'      => 'border:1px solid #dcdcde;border-radius:4px;padding:6px 8px;font-size:13px;color:#1d2327;min-width:120px',
             'filter_btn'  => 'background:#2271b1;color:#fff;border:none;border-radius:4px;padding:6px 14px;font-size:13px;font-weight:500;cursor:pointer',
             'clear_link'  => 'font-size:12px;color:#2271b1;text-decoration:none',
             'danger_link' => 'display:inline-block;background:#fff;color:#d63638;border:1px solid #f5aaab;border-radius:3px;padding:4px 10px;font-size:12px;font-weight:500;text-decoration:none;cursor:pointer',
