@@ -3,7 +3,7 @@
  * Plugin Name: WP Mail Pro
  * Plugin URI:  https://internal.team/wp-mail-pro
  * Description: A full-featured SMTP and API mailer plugin for WordPress — internal use.
- * Version:     1.0.4
+ * Version:     1.0.5
  * Author:      Ringo Media
  * License:     Private
  * Text Domain: wp-mail-pro
@@ -11,7 +11,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'WP_MAIL_PRO_VERSION', '1.0.4' );
+define( 'WP_MAIL_PRO_VERSION', '1.0.5' );
 define( 'WP_MAIL_PRO_FILE',    __FILE__ );
 define( 'WP_MAIL_PRO_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'WP_MAIL_PRO_URL',     plugin_dir_url( __FILE__ ) );
