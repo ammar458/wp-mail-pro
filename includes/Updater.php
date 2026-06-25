@@ -143,10 +143,13 @@ class Updater {
         }
 
         $plugin_folder = WP_PLUGIN_DIR . '/wp-mail-pro';
-        $wp_filesystem->move( $result['destination'], $plugin_folder );
-        $result['destination'] = $plugin_folder;
 
-        activate_plugin( self::PLUGIN_SLUG );
+        // Only rename if the extracted folder name differs (GitHub zips extract to
+        // something like "ammar458-wp-mail-pro-abc123" instead of "wp-mail-pro").
+        if ( trailingslashit( $result['destination'] ) !== trailingslashit( $plugin_folder ) ) {
+            $wp_filesystem->move( $result['destination'], $plugin_folder );
+            $result['destination'] = $plugin_folder;
+        }
 
         return $result;
     }
