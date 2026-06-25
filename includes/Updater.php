@@ -50,9 +50,9 @@ class Updater {
         }
         check_admin_referer( 'wmp_force_check' );
         delete_transient( self::CACHE_KEY );
-        delete_site_transient( 'update_plugins' );
-        wp_update_plugins();
-        wp_redirect( self_admin_url( 'plugins.php' ) );
+        // Redirect to WordPress's native force-check URL which reliably runs
+        // wp_update_plugins() and then redirects back to the Updates page.
+        wp_redirect( self_admin_url( 'update-core.php?force-check=1' ) );
         exit;
     }
 
