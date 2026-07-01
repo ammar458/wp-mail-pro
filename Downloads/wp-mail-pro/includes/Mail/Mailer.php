@@ -8,15 +8,16 @@ use WPMailPro\Helpers;
 class Mailer {
 
     private static array $mailer_map = [
-        'smtp'      => \WPMailPro\Mailers\SMTP::class,
-        'gmail'     => \WPMailPro\Mailers\Gmail::class,
-        'outlook'   => \WPMailPro\Mailers\Outlook::class,
-        'sendgrid'  => \WPMailPro\Mailers\SendGrid::class,
-        'mailgun'   => \WPMailPro\Mailers\Mailgun::class,
-        'amazonses' => \WPMailPro\Mailers\AmazonSES::class,
-        'postmark'  => \WPMailPro\Mailers\Postmark::class,
-        'brevo'     => \WPMailPro\Mailers\Brevo::class,
-        'sparkpost' => \WPMailPro\Mailers\SparkPost::class,
+        'smtp'       => \WPMailPro\Mailers\SMTP::class,
+        'phpmailer'  => \WPMailPro\Mailers\PHPMailer::class,
+        'gmail'      => \WPMailPro\Mailers\Gmail::class,
+        'outlook'    => \WPMailPro\Mailers\Outlook::class,
+        'sendgrid'   => \WPMailPro\Mailers\SendGrid::class,
+        'mailgun'    => \WPMailPro\Mailers\Mailgun::class,
+        'amazonses'  => \WPMailPro\Mailers\AmazonSES::class,
+        'postmark'   => \WPMailPro\Mailers\Postmark::class,
+        'brevo'      => \WPMailPro\Mailers\Brevo::class,
+        'sparkpost'  => \WPMailPro\Mailers\SparkPost::class,
     ];
 
     // Mailers that send via HTTP API and should bypass PHPMailer entirely

@@ -42,7 +42,8 @@ class SettingsPage {
     public function render(): void {
         $mailer    = Helpers::get_current_mailer();
         $mailers   = Helpers::get_mailer_list();
-        $smtp      = (array) get_option( 'wmp_smtp', [] );
+        $smtp       = (array) get_option( 'wmp_smtp', [] );
+        $phpmailer  = (array) get_option( 'wmp_phpmailer', [] );
         $sendgrid  = (array) get_option( 'wmp_sendgrid', [] );
         $mailgun   = (array) get_option( 'wmp_mailgun', [] );
         $ses       = (array) get_option( 'wmp_amazonses', [] );
@@ -125,6 +126,41 @@ class SettingsPage {
                     <tr><th>Username</th><td><input type="text" name="wmp_smtp_user" value="<?php echo esc_attr( $smtp['user'] ?? '' ); ?>" class="regular-text" placeholder="your@email.com" autocomplete="off"></td></tr>
                     <tr><th>Password</th><td><input type="password" name="wmp_smtp_pass" value="<?php echo esc_attr( $smtp['pass'] ?? '' ); ?>" class="regular-text" autocomplete="new-password"></td></tr>
                 </table>
+                <?php $this->card_close(); ?>
+                </div>
+
+                <!-- PHPMailer -->
+                <div class="wmp-mailer-config" data-mailer="phpmailer" <?php echo $mailer !== 'phpmailer' ? 'style="display:none"' : ''; ?>>
+                <?php $this->card_open( 'email-alt', 'PHPMailer (PHP mail()) configuration' ); ?>
+                <?php $this->guide( 'About PHPMailer / PHP mail()', [
+                    'Uses your server\'s built-in PHP <code>mail()</code> function — no external service or credentials needed.',
+                    'Delivery depends entirely on your server\'s mail configuration (Sendmail, Postfix, etc.).',
+                    'Choose <strong>PHP mail()</strong> for the default PHP transport, or <strong>Sendmail</strong> to call the sendmail binary directly.',
+                    'If emails land in spam or are rejected, switch to SMTP or an API-based mailer for better deliverability.',
+                ], 'Best used on servers with a properly configured MTA (Postfix / Sendmail). Not recommended for production sites without server-level mail setup.' ); ?>
+                <table class="form-table">
+                    <tr>
+                        <th>Transport</th>
+                        <td>
+                            <select name="wmp_phpmailer_sender">
+                                <option value="mail" <?php selected( $phpmailer['sender'] ?? 'mail', 'mail' ); ?>>PHP mail()</option>
+                                <option value="sendmail" <?php selected( $phpmailer['sender'] ?? 'mail', 'sendmail' ); ?>>Sendmail</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr id="wmp-sendmail-path-row" <?php echo ( $phpmailer['sender'] ?? 'mail' ) !== 'sendmail' ? 'style="display:none"' : ''; ?>>
+                        <th>Sendmail path</th>
+                        <td>
+                            <input type="text" name="wmp_phpmailer_sendmail_path" value="<?php echo esc_attr( $phpmailer['sendmail_path'] ?? '/usr/sbin/sendmail' ); ?>" class="regular-text" placeholder="/usr/sbin/sendmail">
+                            <p class="description">Full path to the sendmail binary on your server.</p>
+                        </td>
+                    </tr>
+                </table>
+                <script>
+                document.querySelector('[name="wmp_phpmailer_sender"]').addEventListener('change', function(){
+                    document.getElementById('wmp-sendmail-path-row').style.display = this.value === 'sendmail' ? '' : 'none';
+                });
+                </script>
                 <?php $this->card_close(); ?>
                 </div>
 

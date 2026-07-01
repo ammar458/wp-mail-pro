@@ -31,6 +31,38 @@ class Updater {
         add_filter( 'plugins_api',                           [ $this, 'plugin_info' ], 10, 3 );
         add_filter( 'upgrader_post_install',                 [ $this, 'after_install' ], 10, 3 );
         add_action( 'admin_notices',                         [ $this, 'maybe_show_config_notice' ] );
+
+        // When WordPress clears its plugin update cache (e.g. "Check Again"), clear ours too.
+        add_action( 'delete_site_transient_update_plugins', function() {
+            delete_transient( self::CACHE_KEY );
+        } );
+
+        // Handle force-check request from the Plugins page link.
+        add_action( 'admin_init', [ $this, 'handle_force_check' ] );
+
+        // Add "Check for updates" link to the plugin row.
+        add_filter( 'plugin_action_links_' . self::PLUGIN_SLUG, [ $this, 'add_check_link' ] );
+    }
+
+    public function handle_force_check(): void {
+        if ( empty( $_GET['wmp_force_check'] ) || ! current_user_can( 'update_plugins' ) ) {
+            return;
+        }
+        check_admin_referer( 'wmp_force_check' );
+        delete_transient( self::CACHE_KEY );
+        // Redirect to WordPress's native force-check URL which reliably runs
+        // wp_update_plugins() and then redirects back to the Updates page.
+        wp_redirect( self_admin_url( 'update-core.php?force-check=1' ) );
+        exit;
+    }
+
+    public function add_check_link( array $links ): array {
+        $url = wp_nonce_url(
+            add_query_arg( 'wmp_force_check', '1', self_admin_url( 'plugins.php' ) ),
+            'wmp_force_check'
+        );
+        $links[] = '<a href="' . esc_url( $url ) . '">Check for updates</a>';
+        return $links;
     }
 
     /**
@@ -111,10 +143,13 @@ class Updater {
         }
 
         $plugin_folder = WP_PLUGIN_DIR . '/wp-mail-pro';
-        $wp_filesystem->move( $result['destination'], $plugin_folder );
-        $result['destination'] = $plugin_folder;
 
-        activate_plugin( self::PLUGIN_SLUG );
+        // Only rename if the extracted folder name differs (GitHub zips extract to
+        // something like "ammar458-wp-mail-pro-abc123" instead of "wp-mail-pro").
+        if ( trailingslashit( $result['destination'] ) !== trailingslashit( $plugin_folder ) ) {
+            $wp_filesystem->move( $result['destination'], $plugin_folder );
+            $result['destination'] = $plugin_folder;
+        }
 
         return $result;
     }

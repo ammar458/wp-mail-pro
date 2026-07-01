@@ -28,6 +28,7 @@ class Settings {
 
         // Mailer-specific settings
         $this->save_smtp_settings();
+        $this->save_phpmailer_settings();
         $this->save_sendgrid_settings();
         $this->save_mailgun_settings();
         $this->save_amazonses_settings();
@@ -49,6 +50,13 @@ class Settings {
 
         wp_safe_redirect( admin_url( 'admin.php?page=wp-mail-pro&saved=1' ) );
         exit;
+    }
+
+    private function save_phpmailer_settings(): void {
+        update_option( 'wmp_phpmailer', [
+            'sender'        => sanitize_key( $_POST['wmp_phpmailer_sender'] ?? 'mail' ),
+            'sendmail_path' => sanitize_text_field( $_POST['wmp_phpmailer_sendmail_path'] ?? '/usr/sbin/sendmail' ),
+        ] );
     }
 
     private function save_smtp_settings(): void {
