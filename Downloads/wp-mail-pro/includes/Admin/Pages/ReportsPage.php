@@ -7,7 +7,24 @@ use WPMailPro\Log\LogQuery;
 
 class ReportsPage {
 
+    public function handle_send_report(): void {
+        check_admin_referer( 'wmp_send_weekly_report' );
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'Unauthorized', 'wp-mail-pro' ) );
+        }
+        ( new \WPMailPro\Reports\WeeklySummary() )->send();
+        wp_redirect( add_query_arg(
+            [ 'page' => 'wp-mail-pro-reports', 'wmp_report_sent' => '1' ],
+            admin_url( 'admin.php' )
+        ) );
+        exit;
+    }
+
     public function render(): void {
+        if ( ! empty( $_GET['wmp_report_sent'] ) ) {
+            echo '<div class="notice notice-success is-dismissible"><p>Weekly report sent successfully.</p></div>';
+        }
+
         $query  = new LogQuery();
         $stats  = $query->get_stats();
         $daily  = $query->get_daily_counts( 30 );

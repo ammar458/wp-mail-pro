@@ -7,15 +7,16 @@ class Helpers {
 
     public static function get_mailer_list(): array {
         return [
-            'smtp'      => 'SMTP',
-            'gmail'     => 'Gmail / Google Workspace',
-            'outlook'   => 'Microsoft 365 / Outlook',
-            'sendgrid'  => 'SendGrid',
-            'mailgun'   => 'Mailgun',
-            'amazonses' => 'Amazon SES',
-            'postmark'  => 'Postmark',
-            'brevo'     => 'Brevo (Sendinblue)',
-            'sparkpost' => 'SparkPost / Bird',
+            'smtp'       => 'SMTP',
+            'phpmailer'  => 'PHPMailer (PHP mail())',
+            'gmail'      => 'Gmail / Google Workspace',
+            'outlook'    => 'Microsoft 365 / Outlook',
+            'sendgrid'   => 'SendGrid',
+            'mailgun'    => 'Mailgun',
+            'amazonses'  => 'Amazon SES',
+            'postmark'   => 'Postmark',
+            'brevo'      => 'Brevo (Sendinblue)',
+            'sparkpost'  => 'SparkPost / Bird',
         ];
     }
 
