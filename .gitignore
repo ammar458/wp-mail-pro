@@ -1,0 +1,11 @@
+﻿# Ignore everything in the home directory by default
+/*
+!/assets/
+!/includes/
+!/wp-mail-pro.php
+!/build.ps1
+!/.gitignore
+!/dist/
+
+# Keep Downloads ignored (plugin dev folder lives here but shouldn't be tracked)
+/Downloads/

@@ -86,7 +86,7 @@ class Updater {
                 'plugin'      => self::PLUGIN_SLUG,
                 'new_version' => $remote_version,
                 'url'         => $release['html_url'],
-                'package'     => $release['zipball_url'],
+                'package'     => $this->get_package_url( $release ),
                 'icons'       => [],
                 'banners'     => [],
             ];
@@ -119,7 +119,7 @@ class Updater {
             'version'       => $version,
             'author'        => 'Internal Team',
             'homepage'      => $release['html_url'],
-            'download_link' => $release['zipball_url'],
+            'download_link' => $this->get_package_url( $release ),
             'sections'      => [
                 'description' => 'Full-featured SMTP and API mailer plugin.',
                 'changelog'   => nl2br( esc_html( $release['body'] ?? 'See GitHub for release notes.' ) ),
@@ -144,14 +144,64 @@ class Updater {
 
         $plugin_folder = WP_PLUGIN_DIR . '/wp-mail-pro';
 
-        // Only rename if the extracted folder name differs (GitHub zips extract to
-        // something like "ammar458-wp-mail-pro-abc123" instead of "wp-mail-pro").
+        // Rename GitHub's auto-generated folder (e.g. "ammar458-wp-mail-pro-abc123") to the plugin slug.
         if ( trailingslashit( $result['destination'] ) !== trailingslashit( $plugin_folder ) ) {
             $wp_filesystem->move( $result['destination'], $plugin_folder );
             $result['destination'] = $plugin_folder;
         }
 
+        // Safety net: if the main plugin file isn't at the root (happens when the
+        // git repo root differs from the plugin directory), find it and hoist it up.
+        if ( ! $wp_filesystem->exists( trailingslashit( $plugin_folder ) . 'wp-mail-pro.php' ) ) {
+            $nested = $this->find_plugin_root( $plugin_folder );
+            if ( $nested && $nested !== $plugin_folder ) {
+                $items = $wp_filesystem->dirlist( trailingslashit( $nested ) );
+                if ( $items ) {
+                    foreach ( array_keys( $items ) as $name ) {
+                        $wp_filesystem->move(
+                            trailingslashit( $nested ) . $name,
+                            trailingslashit( $plugin_folder ) . $name
+                        );
+                    }
+                }
+                // Remove the now-empty top-level subdirectory that contained the nested files.
+                $relative = ltrim( str_replace( $plugin_folder, '', $nested ), '/\\' );
+                $top_dir  = strtok( $relative, '/\\' );
+                if ( $top_dir ) {
+                    $wp_filesystem->delete( trailingslashit( $plugin_folder ) . $top_dir, true );
+                }
+            }
+        }
+
         return $result;
+    }
+
+    private function find_plugin_root( string $dir, int $depth = 0 ): ?string {
+        global $wp_filesystem;
+
+        if ( $depth > 5 ) {
+            return null;
+        }
+
+        $items = $wp_filesystem->dirlist( trailingslashit( $dir ) );
+        if ( ! $items ) {
+            return null;
+        }
+
+        if ( isset( $items['wp-mail-pro.php'] ) ) {
+            return $dir;
+        }
+
+        foreach ( $items as $name => $data ) {
+            if ( 'd' === $data['type'] ) {
+                $found = $this->find_plugin_root( trailingslashit( $dir ) . $name, $depth + 1 );
+                if ( $found ) {
+                    return $found;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -169,6 +219,22 @@ class Updater {
             return;
         }
         echo '<div class="notice notice-warning"><p><strong>WP Mail Pro:</strong> Auto-updates are not configured. Open <code>includes/Updater.php</code> and set your <code>GITHUB_REPO</code>.</p></div>';
+    }
+
+    /**
+     * Return the best download URL for a release.
+     * Prefers a wp-mail-pro.zip asset (correctly structured) over the
+     * auto-generated zipball (which may have a nested directory layout).
+     */
+    private function get_package_url( array $release ): string {
+        if ( ! empty( $release['assets'] ) ) {
+            foreach ( $release['assets'] as $asset ) {
+                if ( 'wp-mail-pro.zip' === ( $asset['name'] ?? '' ) ) {
+                    return $asset['browser_download_url'];
+                }
+            }
+        }
+        return $release['zipball_url'];
     }
 
     /**
