@@ -31,7 +31,7 @@ class GmailOAuth {
     }
 
     public function handle_callback(): void {
-        if ( ! isset( $_GET['code'], $_GET['state'] ) || ! str_contains( $_SERVER['REQUEST_URI'] ?? '', 'wmp_gmail_callback' ) ) {
+        if ( ! isset( $_GET['code'], $_GET['state'] ) || strpos( $_SERVER['REQUEST_URI'] ?? '', 'wmp_gmail_callback' ) === false ) {
             return;
         }
 

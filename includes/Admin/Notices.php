@@ -11,7 +11,7 @@ class Notices {
             echo '<div class="notice notice-success is-dismissible"><p><strong>WP Mail Pro:</strong> Settings saved successfully.</p></div>';
         }
 
-        if ( isset( $_GET['page'] ) && str_starts_with( $_GET['page'], 'wp-mail-pro' ) ) {
+        if ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'wp-mail-pro' ) === 0 ) {
             $mailer = \WPMailPro\Helpers::get_current_mailer();
             $class  = \WPMailPro\Mail\Mailer::get_mailer_class( $mailer );
 
